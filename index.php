@@ -9,9 +9,10 @@ require 'sessao.php';
 </head>
 <body>
 	<h1>DBFarma</h1>
-	<form name ="frmcontato" method ="POST">
-	<button name = "send" type = "submit">Enviar</button>
-	<button name = "clean" type = "reset">Limpar</button>
+	<form name ="frmPrincipal" method ="POST">
+	<input onclick="location.href='cadastroTransicionador.php'" type="button" value="Cadastro de Transacionador"></input>
+	<input onclick="location.href='cadastroProduto.php'" type="button" value="Cadastro de Produto"></input>
+	<input onclick="location.href='venda.php'" type="button" value="Venda"></input>
 	
 	<p><p>
 	<h2>Relatórios</h2>
