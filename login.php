@@ -29,7 +29,7 @@
 <body>
  <div style="margin-right: auto; margin-left: auto; width: 200px">
 <form method="POST" action="cadastro.php">
-<label>Login:</label><input type="text" name="login" id="login"><br>
+<label>Usuário:</label><input type="text" name="login" id="login"><br>
 <label>Senha:</label><input type="password" name="senha" id="senha"><br>
 <input type="submit" value="Cadastrar" id="cadastrar" name="cadastrar">
 </form>
