@@ -4,23 +4,7 @@ require 'db/conexao.php';
 global $conexao;
 
 if (isset ( $_POST )) {
-	$cgc = $_POST["cgc"];
-	$nom = $_POST["nom"];
-	$sex = $_POST["sex"];
-	$raz = $_POST["raz"];
-	$fan = $_POST["nom"];
-	$nas = $_POST["nas"];
-	$cad = $_POST["cad"];
-	$tel = $_POST["tel"];
-	$cel = $_POST["cel"];
-	$ema = $_POST["ema"];
-	$end = $_POST["end"];
-	$cid = $_POST["cid"];
-	$ins = $_POST["ins"];
-	$rgt = $_POST["rgt"];
-	$ctt = $_POST["ctt"];
-	
-	if (validaCgc($cgc)){
+	if (validaCgc($_POST["cgc"])){
 		$sql = "INSERT INTO TRANSACIONADOR 
 		       (CGCTRS,	   NOMTRS, SEXTRS
 				RAZSOCTRS, NOMFANTRS, DATNASFUNTRS, DATCADTRS, 
@@ -53,7 +37,7 @@ if (isset ( $_POST )) {
 		$sql->bindParam(':ctt', $_POST['ctt'], PDO::PARAM_STR);
 		
 		$sql->execute();
-	}
+	} else echo "Há um transacionador já cadastrado com este CGC";
 }
 
 function validaCgc($cgc){

@@ -9,7 +9,7 @@
 <?php  if(isset($msg)) echo "<h3>" . $msg . "</h3>";?>
  <div style="margin-right: auto; margin-left: auto; width: 165px">
 	<h3 align="center">Transicionador:</h3>
-	<form action="processarTransacionador" name="frmtransicionador" method="post">
+	<form action="processarTransacionador.php" name="frmtransicionador" method="post">
 		<input type="hidden" name= "op"  value="I" /> 
 		<input type="text"   name= "cgc" placeholder="Digite o CPF/CNPJ"                   required="required" autofocus="autofocus" maxlength="18" style="width: 170px"/>		<p/>
 		<input type="text"   name= "nom" placeholder="Digite o nome"                       required="required" maxlength="60" style="width: 170px"/>		<p/>
