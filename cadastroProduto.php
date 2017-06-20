@@ -33,8 +33,12 @@
 		<p />
 		<input type="text"name="codtabdes" placeholder="Código da tabela de desconto" required="required"autofocus="autofocus" style="width: 170px/>
 		<p />
-		<input type="text"name="codcat" placeholder="Código" required="required"autofocus="autofocus"style="width: 170px/>
-		<p />
+		<input type="radio"  name= "codcat" value ="A" /> Antibióticos &nbsp;&nbsp; <p/> 
+		<input type="radio"  name= "codcat" value ="C" /> Controlados &nbsp;&nbsp; <p/>
+		<input type="radio"  name= "codcat" value ="H" /> Higiene &nbsp;&nbsp; <p/>
+		<input type="radio"  name= "codcat" value ="O" /> Outros &nbsp;&nbsp; <p/>   
+		<input type="radio"  name= "codcat" value ="G" /> Genérico <p />
+		
 		<input type="text"name="codtabpre" placeholder="Código da tabela de preço" required="required"autofocus="autofocus"style="width: 170px/>
 		
 			<p />
