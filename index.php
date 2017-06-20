@@ -29,22 +29,135 @@ require 'sessao.php';
 </html>
 
 <?php
+	require 'db/conexao.php';
+
 	if(isset($_POST) && isset($_POST["chk"])){
 		$chk = $_POST["chk"];
 		
 		switch ($chk){
-			case "1": $sql = 'SELECT name, color, calories FROM fruit ORDER BY name';; 
+			case "1": emitirRelatorio1();
 			break;
-			case "2": $sql = 'SELECT name, color, calories FROM fruit ORDER BY name';;
+			case "2": emitirRelatorio2();
 			break;
-			case "3": $sql = 'SELECT name, color, calories FROM fruit ORDER BY name';;
+			case "3": emitirRelatorio3();
 			break;
-			case "4": $sql = 'SELECT name, color, calories FROM fruit ORDER BY name';;
+			case "4": emitirRelatorio4();
 			break;
 			
-			foreach ($conn->query($sql) as $row) {
-				
-			}
+			
 		}
+	}
+	
+	function emitirRelatorio1(){
+		global $conexao;
+		$sql = 'SELECT t.cgctrs, t.nomtrs, t.datcadtrs FROM TRANSACIONADOR t
+                        inner join TRANSACIONADOR_TIPO p on t.codtip = p.codtip
+						where t.sextrs = "F" and
+							  p.tiptrs = "C"
+						ORDER BY nomtrs';
+		
+		$sql = $conexao->prepare($sql);
+		$sql = $sql->fetch(PDO::FETCH_ASSOC);
+		
+		echo '<table cellpadding="2" cellspacing="2" border="1">'
+		   + '<tr>'
+		   + '<th> Código transacionador </th>'
+		   + '<th> Nome transacionador </th>'
+		   + '<th> Data de cadastro</th>';
+			
+		while ($sql) {
+			echo
+				'<th>'. $ret['cgctrs']. '</th>'
+		      + '<th>'. $ret['nomtrs']. '</th>'
+			  + '<th>'. $ret['datcadtrs']. '</th>';
+		}
+			
+		echo '</tr></table>';
+	}
+	
+	function emitirRelatorio2(){
+		global $conexao;
+		$sql = 'SELECT p.codpro, p.nompro, p.valvenpro FROM PRODUTO p
+						inner join CATEGORIA c on p.codcat = c.codcat
+						where extract(YEAR FROM datcadpro) = 2017 and
+							  valvenpro > 100 and
+							  c.tipcat = "FP"
+						ORDER BY nompro asc';
+		
+		$sql = $conexao->prepare($sql);
+		$sql = $sql->fetch(PDO::FETCH_ASSOC);
+		
+		echo '<table cellpadding="2" cellspacing="2" border="1">'
+		   + '<tr>'
+		   + '<th> Código Produto </th>'
+		   + '<th> Nome produto </th>'
+		   + '<th> Valor de venda</th>';
+				
+		while ($sql) {
+			echo 
+			  '<th>'. $ret['codpro']. '</th>'
+			+ '<th>'. $ret['nompro']. '</th>'
+			+ '<th>'. $ret['valvenpro']. '</th>';
+		}
+		
+		echo '</tr></table>';
+	}
+	function emitirRelatorio3(){
+		global $conexao;
+		
+		$sql = 'SELECT extract(MONTH FROM datven) as mes, count(*) as qtd, valtotven FROM VENDA v
+						inner join VENDA_ITEM i on i.codven = v.codven
+						inner join TRANSACIONADOR t on t.cgctrs = v.cgctrs
+						where i.valdesitm > 0 and
+							  extract(YEAR FROM v.datven) = 2016 and
+							  sextrs = "F"';
+		
+		$sql = $conexao->prepare($sql);
+		$sql = $sql->fetch(PDO::FETCH_ASSOC);
+		
+		echo '<table cellpadding="2" cellspacing="2" border="1">'	
+		   + '<tr>'
+		   + '<th> Mês da venda </th>'
+		   + '<th> Quantidade vendas </th>'
+		   + '<th> Valor total das vendas</th>';
+		   		
+		while ($sql) {
+			echo
+		   	  '<th>'. $ret['mes']. '</th>'
+			+ '<th>'. $ret['qtd']. '</th>'
+			+ '<th>'. $ret['valtotven']. '</th>';
+		}
+		   		
+		echo '</tr></table>';
+	}
+	
+	function emitirRelatorio4(){
+		global $conexao;
+		$sql = 'SELECT t.cgctrs, v.codven, v.datven, v.valtotven FROM VENDA v
+						inner join TRANSACIONADOR t on t.cgctrs = v.cgctrs
+						where (t.cidtrs like ("MARAVILHA") or
+							   t.cidtrs like ("DESCANÇO")) and
+							  (extract(MONTH FROM v.datven) % 2 = 0)
+						ORDER BY datven desc';
+		
+		$sql = $conexao->prepare($sql);
+		$sql = $sql->fetch(PDO::FETCH_ASSOC);
+		
+		echo '<tablecellpadding="2" cellspacing="2" border="2"> 
+			  <tr>
+		      <th> Mês da venda </th>
+		      <th> Quantidade vendas </th>
+		      <th> Valor total das vendas</th>';
+		
+		
+		
+		while ($sql) {
+		   	echo
+		   	  '<th>'. $sql['mes']. '</th>'
+		   	. '<th>'. $sql['qtd']. '</th>'
+			. '<th>'. $sql['valtotven']. '</th>';
+		}
+		   		
+		echo '</tr></table>';
 	}
 ?>
