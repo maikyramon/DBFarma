@@ -15,7 +15,7 @@
 		$_SESSION["usuario"] = $_POST["login"];
 		header ("Location: index.php");
 	} else {
-		$mensagem = "Login e/ou senha inválidos! tente novamente";
+		$mensagem = "Login e/ou senha invï¿½lidos! tente novamente";
 	}
   }
 
@@ -27,11 +27,14 @@
 </head>
 </head>
 <body>
- <div style="margin-right: auto; margin-left: auto; width: 200px">
-<form method="POST" action="cadastro.php">
-<label>Usuário:</label><input type="text" name="login" id="login"><br>
-<label>Senha:</label><input type="password" name="senha" id="senha"><br>
-<input type="submit" value="Cadastrar" id="cadastrar" name="cadastrar">
-</form>
+	<div style="margin-right: auto; margin-left: auto; width: 200px">
+		<form method="POST">
+			<label>Login:</label><input type="text" name="login" id="login"><br>
+			<label>Senha:</label><input type="password" name="senha" id="senha"><br>
+			
+			<input type="submit" value="Entrar" id="entrar" name="entrar">
+			<a href="cadastroUsuario.php">Cadastrar-se</a>
+		</form>
+	</div>
 </body>
 </html>

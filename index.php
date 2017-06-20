@@ -22,8 +22,6 @@ require 'sessao.php';
 	
 	<p><p>
 	<button name = "send" type = "submit">Enviar</button>
-	<p>
-	<a href="cadastroUsuario.php">Cadastrar-se</a>
 	</form>
 </body>
 </html>
@@ -59,11 +57,11 @@ require 'sessao.php';
 		$sql = $conexao->prepare($sql);
 		$sql = $sql->fetch(PDO::FETCH_ASSOC);
 		
-		echo '<table cellpadding="2" cellspacing="2" border="1">'
-		   + '<tr>'
-		   + '<th> Código transacionador </th>'
-		   + '<th> Nome transacionador </th>'
-		   + '<th> Data de cadastro</th>';
+		echo '<table cellpadding="2" cellspacing="2" border=1>
+		      <tr>
+		      <th> Código transacionador </th>
+		      <th> Nome transacionador </th>
+		      <th> Data de cadastro</th>';
 			
 		while ($sql) {
 			echo
@@ -87,17 +85,17 @@ require 'sessao.php';
 		$sql = $conexao->prepare($sql);
 		$sql = $sql->fetch(PDO::FETCH_ASSOC);
 		
-		echo '<table cellpadding="2" cellspacing="2" border="1">'
-		   + '<tr>'
-		   + '<th> Código Produto </th>'
-		   + '<th> Nome produto </th>'
-		   + '<th> Valor de venda</th>';
+		echo '<table cellpadding="2" cellspacing="2" border=1>
+		  	  <tr>
+		      <th> Código Produto </th>
+		   	  <th> Nome produto </th>
+		      <th> Valor de venda</th>';
 				
 		while ($sql) {
 			echo 
 			  '<th>'. $ret['codpro']. '</th>'
-			+ '<th>'. $ret['nompro']. '</th>'
-			+ '<th>'. $ret['valvenpro']. '</th>';
+			. '<th>'. $ret['nompro']. '</th>'
+			. '<th>'. $ret['valvenpro']. '</th>';
 		}
 		
 		echo '</tr></table>';
@@ -115,17 +113,17 @@ require 'sessao.php';
 		$sql = $conexao->prepare($sql);
 		$sql = $sql->fetch(PDO::FETCH_ASSOC);
 		
-		echo '<table cellpadding="2" cellspacing="2" border="1">'	
-		   + '<tr>'
-		   + '<th> Mês da venda </th>'
-		   + '<th> Quantidade vendas </th>'
-		   + '<th> Valor total das vendas</th>';
+		echo '<table cellpadding="2" cellspacing="2" border=1>	
+		      <tr>
+		      <th> Mês da venda </th>
+		      <th> Quantidade vendas </th>
+		      <th> Valor total das vendas</th>';
 		   		
 		while ($sql) {
 			echo
 		   	  '<th>'. $ret['mes']. '</th>'
-			+ '<th>'. $ret['qtd']. '</th>'
-			+ '<th>'. $ret['valtotven']. '</th>';
+			. '<th>'. $ret['qtd']. '</th>'
+			. '<th>'. $ret['valtotven']. '</th>';
 		}
 		   		
 		echo '</tr></table>';
@@ -143,7 +141,7 @@ require 'sessao.php';
 		$sql = $conexao->prepare($sql);
 		$sql = $sql->fetch(PDO::FETCH_ASSOC);
 		
-		echo '<tablecellpadding="2" cellspacing="2" border="2"> 
+		echo '<table cellpadding="2" cellspacing="2" border=1> 
 			  <tr>
 		      <th> Mês da venda </th>
 		      <th> Quantidade vendas </th>
