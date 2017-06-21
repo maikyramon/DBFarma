@@ -61,7 +61,8 @@
 					$sql = $sql->fetchAll(PDO::FETCH_BOTH);
 					
 					foreach ($sql as $s){
-						echo '<option value="'. $s['codcat'] . '"> ' . $s['descat'] . '</option>';
+						
+						echo '<option value='. $s['codcat'] . '> ' . $s['descat'] . '</option>';
 					}
 				?>
 			</select>

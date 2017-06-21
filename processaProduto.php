@@ -8,13 +8,15 @@ if (isset ( $_POST )) {
 		$sql = "INSERT INTO PRODUTO
 		       (NOMPRO,    FABPRO,    VALCOMPRO,
 				VALVENPRO, PERDESPRO, ESPPRO,
-				QUAPRO,    CODTABDES, CODCAT, CODTABPRE,
+				QUAPRO,    CODTABDES, CODTABPRE, CODCAT, 
 				DATCADPRO)
 				values
 			   (:nom, :fab,	:com, 
 				:ven, :des, :esp, 
 				:qua, :tbd, :tbp, :cat,
 				current_timestamp)";
+		
+		print_r($_POST);
 		
 		$sql = $conexao->prepare($sql);
 		
@@ -27,7 +29,7 @@ if (isset ( $_POST )) {
 		$sql->bindParam(':qua', $_POST["qua"], PDO::PARAM_STR);
 		$sql->bindParam(':tbd', $_POST["tbd"], PDO::PARAM_STR);
 		$sql->bindParam(':tbp', $_POST["tbp"], PDO::PARAM_STR);
-		$sql->bindParam(':cat', $_POST["cat"], PDO::PARAM_STR);
+		$sql->bindParam(':cat', $_POST["cat"], PDO::PARAM_INT);
 
 		$sql->execute();
 		

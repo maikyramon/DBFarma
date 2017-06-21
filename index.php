@@ -54,11 +54,11 @@ require 'sessao.php';
 	
 	function emitirRelatorio1(){
 		global $conexao;
-		$sql = 'SELECT t.cgctrs, t.nomtrs, t.datcadtrs FROM TRANSACIONADOR t
-                        inner join TRANSACIONADOR_TIPO p on t.codtip = p.codtip
-						where t.sextrs = "F" and
-							  p.tiptrs = "C"
-						ORDER BY nomtrs';
+		$sql = 'SELECT t.cgctrs, t.nomtrs, t.datcadtrs FROM transacionador t
+                INNER JOIN tipo_transacionador p ON t.codtiptrs = p.codtiptrs
+				WHERE t.sextrs = \'F\' AND
+					  p.tiptrs = \'C\'
+				ORDER BY nomtrs DESC';
 		
 		$sql = $conexao->prepare($sql);
 		$sql->execute();
@@ -68,26 +68,28 @@ require 'sessao.php';
 		      <tr>
 		      <th> Código transacionador </th>
 		      <th> Nome transacionador </th>
-		      <th> Data de cadastro </th>';
+		      <th> Data de cadastro </th>
+			  </tr>';
 			
 		foreach ($sql as $s) {
-			echo
-				'<th>'. $s['cgctrs'].    '</th>'
-		      . '<th>'. $s['nomtrs'].    '</th>'
-			  . '<th>'. $s['datcadtrs']. '</th>';
+			echo '<tr>'
+		       . '<th>'. $s['cgctrs'].    '</th>'
+		       . '<th>'. $s['nomtrs'].    '</th>'
+			   . '<th>'. $s['datcadtrs']. '</th>'
+			   . '</tr>';
 		}
 			
-		echo '</tr></table>';
+		echo '</table>';
 	}
 	
 	function emitirRelatorio2(){
 		global $conexao;
-		$sql = 'SELECT p.codpro, p.nompro, p.valvenpro FROM PRODUTO p
-						inner join CATEGORIA c on p.codcat = c.codcat
-						where extract(YEAR FROM datcadpro) = 2017 and
-							  valvenpro > 100 and
-							  c.tipcat = "FP"
-						ORDER BY nompro asc';
+		$sql = 'SELECT p.codpro, p.nompro, p.valvenpro FROM produto p
+				INNER JOIN categoria c ON p.codcat = c.codcat
+				WHERE extract(YEAR FROM datcadpro) = 2017 AND
+					  valvenpro > 100 AND
+					  c.codcat = 6
+				ORDER BY nompro ASC';
 		
 		$sql = $conexao->prepare($sql);
 		$sql->execute();
@@ -97,26 +99,29 @@ require 'sessao.php';
 		  	  <tr>
 		      <th> Código Produto </th>
 		   	  <th> Nome produto </th>
-		      <th> Valor de venda</th>';
+		      <th> Valor de venda </th>
+			  </tr>';
 				
 		foreach ($sql as $s) {
 			echo 
-			  '<th>'. $s['codpro'].    '</th>'
+			  '<tr>'
+			. '<th>'. $s['codpro'].    '</th>'
 			. '<th>'. $s['nompro'].    '</th>'
-			. '<th>'. $s['valvenpro']. '</th>';
+			. '<th>'. $s['valvenpro']. '</th>'
+			. '</tr>';
 		}
 		
-		echo '</tr></table>';
+		echo '</table>';
 	}
 	function emitirRelatorio3(){
 		global $conexao;
 		
-		$sql = 'SELECT extract(MONTH FROM datven) as mes, count(*) as qtd, valtotven FROM VENDA v
-						inner join VENDA_ITEM i on i.codven = v.codven
-						inner join TRANSACIONADOR t on t.cgctrs = v.cgctrs
-						where i.valdesitm > 0 and
-							  extract(YEAR FROM v.datven) = 2016 and
-							  sextrs = "F"';
+		$sql = 'SELECT EXTRACT(MONTH FROM datven) AS mes, count(*) AS qtd, valtotven FROM venda v
+				INNER JOIN venda_item i ON i.codven = v.codven
+				INNER JOIN transacionador t ON t.cgctrs = v.cgctrs
+				WHERE i.valdesitm > 0 AND
+					  extract(YEAR FROM v.datven) = 2016 AND
+					  sextrs = \'F\'';
 		
 		$sql = $conexao->prepare($sql);
 		$sql->execute();
@@ -126,26 +131,29 @@ require 'sessao.php';
 		      <tr>
 		      <th> Mês da venda </th>
 		      <th> Quantidade vendas </th>
-		      <th> Valor total das vendas</th>';
+		      <th> Valor total das vendas</th>
+			  </tr>';
 		   		
 		foreach ($sql as $s) {
 			echo
-		   	  '<th>'. $s['mes'].       '</th>'
+			  '<tr>'
+		   	. '<th>'. $s['mes'].       '</th>'
 			. '<th>'. $s['qtd'].       '</th>'
-			. '<th>'. $s['valtotven']. '</th>';
+			. '<th>'. $s['valtotven']. '</th>'
+			. '</tr>';
 		}
 		   		
-		echo '</tr></table>';
+		echo '</table>';
 	}
 	
 	function emitirRelatorio4(){
 		global $conexao;
-		$sql = 'SELECT t.cgctrs, v.codven, v.datven, v.valtotven FROM VENDA v
-						inner join TRANSACIONADOR t on t.cgctrs = v.cgctrs
-						where (t.cidtrs like ("MARAVILHA") or
-							   t.cidtrs like ("DESCANÇO")) and
-							  (extract(MONTH FROM v.datven) % 2 = 0)
-						ORDER BY datven desc';
+		$sql = 'SELECT t.cgctrs, v.codven, v.datven, v.valtotven FROM venda v
+				INNER JOIN transacionador t ON t.cgctrs = v.cgctrs
+				WHERE (t.cidtrs like (\'MARAVILHA\') OR
+					   t.cidtrs like (\'DESCANÇO\')) AND
+					  (EXTRACT(MONTH FROM v.datven) % 2 = 0)
+				ORDER BY datven DESC';
 		
 		$sql = $conexao->prepare($sql);
 		$sql->execute();
@@ -156,16 +164,19 @@ require 'sessao.php';
 		      <th> Código cliente </th>
 			  <th> Código da venda </th>
 		      <th> Data da venda </th>
-		      <th> Valor total da venda</th>';
+		      <th> Valor total da venda</th>
+			  </tr>';
 		
 		foreach ($sql as $s) {
-		   	echo
-		   	  '<th>'. $s['cgctrs'].    '</th>'
+		   	echo 
+		   	  '<tr>'
+		   	. '<th>'. $s['cgctrs'].    '</th>'
 		   	. '<th>'. $s['codven'].    '</th>'
 			. '<th>'. $s['datven'].    '</th>'
-			. '<th>'. $s['valtotven']. '</th>';
+			. '<th>'. $s['valtotven']. '</th>'
+			. '</tr>';
 		}
 		   		
-		echo '</tr></table>';
+		echo '</table>';
 	}
 ?>
