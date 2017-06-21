@@ -41,10 +41,11 @@
 		$sql->execute(array($_POST["cgc"]));
 		$sql = $sql->fetchAll(PDO::FETCH_BOTH);
 		
+		echo '<table cellpadding=2 cellspacing=2 border=1>';
+		
 		foreach ($sql as $s){ 
 			if($s['cgctrs'] > 0) {
-				echo '<table cellpadding=2 cellspacing=2 border=1>
-				      <tr> <th> RG </th>	             <th> ' . $s["rgtrs"] . ' </th> </tr>
+				echo '<tr> <th> RG </th>	             <th> ' . $s["rgtrs"] . ' </th> </tr>
 					  <tr> <th> Nome </th>	             <th> ' . $s["nomtrs"] . ' </th></tr>
 					  <tr> <th> Sexo </th>	             <th> ' . $s["sextrs"] . ' </th></tr>
 					  <tr> <th> Razão Social </th>	     <th> ' . $s["razsoctrs"] . ' </th></tr>
@@ -59,7 +60,10 @@
 					  <tr> <th> Logradouro </th>	     <th> ' . $s["logtrs"] . ' </th></tr>
 					  <tr> <th> Inscrição Estadual </th> <th> ' . $s["insesttrs"] . ' </th>	</tr>			   
 					  <tr> <th> Tipo cliente </th>	     <th> ' . $s["dsctip"] . ' </th> </tr>';
+				
 			} else echo "Nenhum registro encontrado";
 		}
+		
+		echo '</table>';
 	}
 ?>
