@@ -6,11 +6,11 @@ global $conexao;
 if (isset ( $_POST )) {
 	if (validaCgc($_POST["cgc"])){
 		$sql = "INSERT INTO TRANSACIONADOR 
-		       (CGCTRS,	   NOMTRS, SEXTRS,
+		       (CGCTRS,	   NOMTRS,    SEXTRS,
 				RAZSOCTRS, NOMFANTRS, DATNASFUNTRS, DATCADTRS, 
-				TELTRS,    CELTRS, EMATRS,    
-				ENDTRS,    CIDTRS, LOGTRS,    
-			    INSESTTRS, RGTRS, CODTIPTRS)
+				TELTRS,    CELTRS,    EMATRS,    
+				ENDTRS,    CIDTRS,    LOGTRS,    
+			    INSESTTRS, RGTRS,     CODTIPTRS)
 				values 
 			   (:cgc, :nom, :sex,			
 				:raz, :fan, :nas, current_timestamp, 
@@ -26,7 +26,6 @@ if (isset ( $_POST )) {
 		$sql->bindParam(':raz', $_POST['raz'], PDO::PARAM_STR);
 		$sql->bindParam(':fan', $_POST['fan'], PDO::PARAM_STR);
 		$sql->bindParam(':nas', $_POST['nas'], PDO::PARAM_STR);
-		//$sql->bindParam(':cad', 'current_timestamp', PDO::PARAM_STR);
 		$sql->bindParam(':tel', $_POST['tel'], PDO::PARAM_STR);
 		$sql->bindParam(':cel', $_POST['cel'], PDO::PARAM_STR);
 		$sql->bindParam(':ema', $_POST['ema'], PDO::PARAM_STR);
