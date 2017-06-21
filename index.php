@@ -42,8 +42,6 @@ require 'sessao.php';
 			break;
 			case "4": emitirRelatorio4();
 			break;
-			
-			
 		}
 	}
 	
@@ -56,19 +54,20 @@ require 'sessao.php';
 						ORDER BY nomtrs';
 		
 		$sql = $conexao->prepare($sql);
-		$sql = $sql->fetch(PDO::FETCH_ASSOC);
+		$sql->execute();
+		$sql = $sql->fetchAll(PDO::FETCH_BOTH);
 		
-		echo '<table cellpadding="2" cellspacing="2" border=1>
+		echo '<table cellpadding=2 cellspacing=2 border=1>
 		      <tr>
 		      <th> Código transacionador </th>
 		      <th> Nome transacionador </th>
-		      <th> Data de cadastro</th>';
+		      <th> Data de cadastro </th>';
 			
-		while ($sql) {
+		foreach ($sql as $s) {
 			echo
-				'<th>'. $ret['cgctrs']. '</th>'
-		      + '<th>'. $ret['nomtrs']. '</th>'
-			  + '<th>'. $ret['datcadtrs']. '</th>';
+				'<th>'. $s['cgctrs'].    '</th>'
+		      . '<th>'. $s['nomtrs'].    '</th>'
+			  . '<th>'. $s['datcadtrs']. '</th>';
 		}
 			
 		echo '</tr></table>';
@@ -84,19 +83,20 @@ require 'sessao.php';
 						ORDER BY nompro asc';
 		
 		$sql = $conexao->prepare($sql);
-		$sql = $sql->fetch(PDO::FETCH_ASSOC);
+		$sql->execute();
+		$sql = $sql->fetchAll(PDO::FETCH_BOTH);
 		
-		echo '<table cellpadding="2" cellspacing="2" border=1>
+		echo '<table cellpadding=2 cellspacing=2 border=1>
 		  	  <tr>
 		      <th> Código Produto </th>
 		   	  <th> Nome produto </th>
 		      <th> Valor de venda</th>';
 				
-		while ($sql) {
+		foreach ($sql as $s) {
 			echo 
-			  '<th>'. $ret['codpro']. '</th>'
-			. '<th>'. $ret['nompro']. '</th>'
-			. '<th>'. $ret['valvenpro']. '</th>';
+			  '<th>'. $s['codpro'].    '</th>'
+			. '<th>'. $s['nompro'].    '</th>'
+			. '<th>'. $s['valvenpro']. '</th>';
 		}
 		
 		echo '</tr></table>';
@@ -112,19 +112,20 @@ require 'sessao.php';
 							  sextrs = "F"';
 		
 		$sql = $conexao->prepare($sql);
-		$sql = $sql->fetch(PDO::FETCH_ASSOC);
+		$sql->execute();
+		$sql = $sql->fetchAll(PDO::FETCH_BOTH);
 		
-		echo '<table cellpadding="2" cellspacing="2" border=1>	
+		echo '<table cellpadding=2 cellspacing=2 border=1>	
 		      <tr>
 		      <th> Mês da venda </th>
 		      <th> Quantidade vendas </th>
 		      <th> Valor total das vendas</th>';
 		   		
-		while ($sql) {
+		foreach ($sql as $s) {
 			echo
-		   	  '<th>'. $ret['mes']. '</th>'
-			. '<th>'. $ret['qtd']. '</th>'
-			. '<th>'. $ret['valtotven']. '</th>';
+		   	  '<th>'. $s['mes'].       '</th>'
+			. '<th>'. $s['qtd'].       '</th>'
+			. '<th>'. $s['valtotven']. '</th>';
 		}
 		   		
 		echo '</tr></table>';
@@ -140,21 +141,22 @@ require 'sessao.php';
 						ORDER BY datven desc';
 		
 		$sql = $conexao->prepare($sql);
-		$sql = $sql->fetch(PDO::FETCH_ASSOC);
+		$sql->execute();
+		$sql = $sql->fetchAll(PDO::FETCH_BOTH);
 		
-		echo '<table cellpadding="2" cellspacing="2" border=1> 
+		echo '<table cellpadding=2 cellspacing=2 border=1> 
 			  <tr>
-		      <th> Mês da venda </th>
-		      <th> Quantidade vendas </th>
-		      <th> Valor total das vendas</th>';
+		      <th> Código cliente </th>
+			  <th> Código da venda </th>
+		      <th> Data da venda </th>
+		      <th> Valor total da venda</th>';
 		
-		
-		
-		while ($sql) {
+		foreach ($sql as $s) {
 		   	echo
-		   	  '<th>'. $sql['mes']. '</th>'
-		   	. '<th>'. $sql['qtd']. '</th>'
-			. '<th>'. $sql['valtotven']. '</th>';
+		   	  '<th>'. $s['cgctrs'].    '</th>'
+		   	. '<th>'. $s['codven'].    '</th>'
+			. '<th>'. $s['datven'].    '</th>'
+			. '<th>'. $s['valtotven']. '</th>';
 		}
 		   		
 		echo '</tr></table>';
