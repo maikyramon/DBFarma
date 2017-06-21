@@ -5,7 +5,7 @@
 <title>Cadastro de Usu�rio</title>
 </head>
 <body>
-	<form action="processaUsuario.php" method="post">
+	<form action="processaUsuario.php" name="frmcadusuario" method="post">
 	 	<h2>Cadastro de Usuário</h2> 
 		<input type="text" name="log" placeholder="Nome Completo" required="required" autofocus="autofocus" maxlength="40" style="width: 170px"/><p/>
 		<input type="text" name="nom" placeholder="Login"         required="required" autofocus="autofocus" maxlength="30" style="width: 170px"/><p/>

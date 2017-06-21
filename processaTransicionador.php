@@ -6,7 +6,7 @@ global $conexao;
 if (isset ( $_POST )) {
 	if (validaCgc($_POST["cgc"])){
 		$sql = "INSERT INTO TRANSACIONADOR 
-		       (CGCTRS,	   NOMTRS, SEXTRS
+		       (CGCTRS,	   NOMTRS, SEXTRS,
 				RAZSOCTRS, NOMFANTRS, DATNASFUNTRS, DATCADTRS, 
 				TELTRS,    CELTRS, EMATRS,    
 				ENDTRS,    CIDTRS, LOGTRS,    
@@ -26,6 +26,7 @@ if (isset ( $_POST )) {
 		$sql->bindParam(':raz', $_POST['raz'], PDO::PARAM_STR);
 		$sql->bindParam(':fan', $_POST['fan'], PDO::PARAM_STR);
 		$sql->bindParam(':nas', $_POST['nas'], PDO::PARAM_STR);
+		//$sql->bindParam(':cad', 'current_timestamp', PDO::PARAM_STR);
 		$sql->bindParam(':tel', $_POST['tel'], PDO::PARAM_STR);
 		$sql->bindParam(':cel', $_POST['cel'], PDO::PARAM_STR);
 		$sql->bindParam(':ema', $_POST['ema'], PDO::PARAM_STR);
@@ -37,19 +38,23 @@ if (isset ( $_POST )) {
 		$sql->bindParam(':ctt', $_POST['ctt'], PDO::PARAM_STR);
 		
 		$sql->execute();
+		
+		if($sql->errorCode() == 0)
+			echo "Cadastrado com sucesso!";
+		else
+			echo $sql->errorCode();
+		
 	} else echo "Há um transacionador já cadastrado com este CGC";
 }
 
 function validaCgc($cgc){
-	$sql = 'SELECT cgctrs from TRANSACIONADOR where cgctrs = :cgc';
+	global $conexao;
+	
+	$sql = 'SELECT count(cgctrs) as conta from TRANSACIONADOR where cgctrs = ?';
 	$sql = $conexao->prepare($sql);
-	$sql = $sql->fetch(PDO::FETCH_ASSOC);
+	$sql->execute(array($cgc));
+	$sql = $sql->fetch(PDO::FETCH_BOTH);
 	
-	$b = false;
-	
-	if (isset($sql))
-		$b = true;
-	
-	return $b;
+	return !($sql['conta'] > 0);
 }
 ?>
