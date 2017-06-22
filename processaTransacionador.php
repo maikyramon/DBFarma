@@ -9,13 +9,13 @@ if (isset ( $_POST )) {
 		       (CGCTRS,	   NOMTRS,    SEXTRS,
 				RAZSOCTRS, NOMFANTRS, DATNASFUNTRS, DATCADTRS, 
 				TELTRS,    CELTRS,    EMATRS,    
-				ENDTRS,    CIDTRS,    LOGTRS,    
+				ENDTRS,    CIDTRS,    
 			    INSESTTRS, RGTRS,     CODTIPTRS)
 				values 
 			   (:cgc, :nom, :sex,			
 				:raz, :fan, :nas, current_timestamp, 
 				:tel, :cel, :ema, 
-				:end, :cid,	:log, 
+				:end, :cid, 
 				:ins, :rgt, :ctt)";
 	
 		$sql = $conexao->prepare($sql);
@@ -31,7 +31,6 @@ if (isset ( $_POST )) {
 		$sql->bindParam(':ema', $_POST['ema'], PDO::PARAM_STR);
 		$sql->bindParam(':end', $_POST['end'], PDO::PARAM_STR);
 		$sql->bindParam(':cid', $_POST['cid'], PDO::PARAM_STR);
-		$sql->bindParam(':log', $_POST['log'], PDO::PARAM_STR);
 		$sql->bindParam(':ins', $_POST['ins'], PDO::PARAM_STR);
 		$sql->bindParam(':rgt', $_POST['rgt'], PDO::PARAM_STR);
 		$sql->bindParam(':ctt', $_POST['ctt'], PDO::PARAM_STR);

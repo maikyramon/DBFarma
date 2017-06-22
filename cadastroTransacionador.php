@@ -22,7 +22,6 @@
 			<input type="text"   name= "ema" placeholder="Digite o E-mail"                     required="required" maxlength="30" style="width: 170px"/><p/>
 			<input type="text"   name= "end" placeholder="Digite o Endereço"                   required="required" maxlength="30" style="width: 170px"/><p/>
 			<input type="text"   name= "cid" placeholder="Digite a Cidade"                     required="required"                style="width: 170px"/><p/>
-			<input type="text"   name= "log" placeholder="Digite a Logradouro"                 required="required"                style="width: 170px"/><p/>
 			<!--<input type="text"   name= "restrs"       placeholder="Informe o responsável pela farmácia" required="required" maxlength="20" style="width: 170px"/>		<p/>-->
 			<input type="text"   name= "ins" placeholder="Digite a Inscrição Estadual"         required="required" maxlength="60" style="width: 170px"/><p/> 
 			<input type="text"   name= "rgt" placeholder="Digite o RG"                         required="required" maxlength="20" style="width: 170px"/><p/>

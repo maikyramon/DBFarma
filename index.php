@@ -116,12 +116,13 @@ require 'sessao.php';
 	function emitirRelatorio3(){
 		global $conexao;
 		
-		$sql = 'SELECT EXTRACT(MONTH FROM datven) AS mes, count(*) AS qtd, valtotven FROM venda v
+		$sql = 'SELECT EXTRACT(MONTH FROM v.datven) AS mes, count(v.*) AS qtd, sum(valtotven) as val FROM venda v
 				INNER JOIN venda_item i ON i.codven = v.codven
 				INNER JOIN transacionador t ON t.cgctrs = v.cgctrs
 				WHERE i.valdesitm > 0 AND
 					  extract(YEAR FROM v.datven) = 2016 AND
-					  sextrs = \'F\'';
+					  sextrs = \'M\'
+				GROUP BY mes';
 		
 		$sql = $conexao->prepare($sql);
 		$sql->execute();
@@ -139,7 +140,7 @@ require 'sessao.php';
 			  '<tr>'
 		   	. '<th>'. $s['mes'].       '</th>'
 			. '<th>'. $s['qtd'].       '</th>'
-			. '<th>'. $s['valtotven']. '</th>'
+			. '<th>'. $s['val']. '</th>'
 			. '</tr>';
 		}
 		   		
@@ -150,9 +151,9 @@ require 'sessao.php';
 		global $conexao;
 		$sql = 'SELECT t.cgctrs, v.codven, v.datven, v.valtotven FROM venda v
 				INNER JOIN transacionador t ON t.cgctrs = v.cgctrs
-				WHERE (t.cidtrs like (\'MARAVILHA\') OR
-					   t.cidtrs like (\'DESCANÇO\')) AND
-					  (EXTRACT(MONTH FROM v.datven) % 2 = 0)
+				WHERE (upper(t.cidtrs) like (\'MARAVILHA\') OR
+					   upper(t.cidtrs) like (\'DESCANÇO\')) AND
+					   mod(cast(EXTRACT(MONTH FROM v.datven)as integer), 2) > 0
 				ORDER BY datven DESC';
 		
 		$sql = $conexao->prepare($sql);

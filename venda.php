@@ -8,11 +8,15 @@
 	$(function() {
 	
 		var addDiv = $('#addinput');
-		var i = $('#addinput p').size() + 1;
+		var i = 0;//$('#addinput p').size() + 1;
 	
 		$('#addNew').live('click', function() {
-			$('<p>' + '<input type="text" id="cod" size="20" name="cod_' + i +'" value="" placeholder="Código item" /> &nbsp; &nbsp;  <input onblur="findTotal()" type="text" name="vlr" size="10" id="vlr' + i +'" value="" placeholder="Valor" /> &nbsp; &nbsp; <input type="text" id="qtd" size="10" name="qtd_' + i +'" value="" placeholder="Quantidade" />  &nbsp; &nbsp; <a href="#" id="remNew"> Remover </a></p>').appendTo(addDiv);
-
+			$('<p>' + 
+			  '<input type="text" id="cod" size="20" name="cod' + i +'" value="" placeholder="Código item" /> &nbsp; &nbsp; '+  
+			  '<input type="text" class="vlr" id="vlr" size="10" name="vlr' + i +'" value="" placeholder="Valor" onblur="findTotal()"/> &nbsp; &nbsp; '+ 
+			  '<input type="text" id="qtd" size="10" name="qtd' + i +'" value="" placeholder="Quantidade" />  &nbsp; &nbsp; ' +
+			  '<input type="text" class="des" id="des" size="10" name="des' + i +'" value="" placeholder="Desc" onblur="findTotal()"/> &nbsp; &nbsp; '+ 
+			  '<a href="#" id="remNew"> Remover </a></p>').appendTo(addDiv);
 			i++;
 			return false;
 		});
@@ -26,14 +30,17 @@
 			return false;
 		});
 	});
-
 	function findTotal(){
-	    var arr = document.getElementsByName('vlr');
+	    var vlr = document.getElementsByClassName('vlr');
+	    var des = document.getElementsByClassName('des');
 	    var tot=0;
 	  
-	    for(var i=0;i<arr.length;i++){
-	        if(parseInt(arr[i].value))
-	            tot += parseInt(arr[i].value);
+	    for(var i=0;i<vlr.length;i++){
+	        if(parseInt(vlr[i].value))
+	            tot += parseFloat(vlr[i].value);
+            
+	        if(parseInt(des[i].value))
+	            tot -= parseFloat(des[i].value);
 	    }
 	    document.getElementById('total').value = tot;
 	    document.getElementById('qtdtot').value = i;
