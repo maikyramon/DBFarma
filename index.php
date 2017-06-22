@@ -11,7 +11,7 @@ require 'sessao.php';
 	<h1>DBFarma</h1>
 	<h2>Cadastros</h2>
 	<form name ="frmPrincipal" method ="POST">
-	<input onclick="location.href='cadastroTransicionador.php'" type="button" value="Cadastro de Transacionador"></input>
+	<input onclick="location.href='cadastroTransacionador.php'" type="button" value="Cadastro de Transacionador"></input>
 	<input onclick="location.href='cadastroProduto.php'" type="button" value="Cadastro de Produto"></input>
 	<input onclick="location.href='venda.php'" type="button" value="Venda"></input>
 	

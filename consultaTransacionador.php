@@ -5,15 +5,13 @@
 <title>Cadastro de Transicionador</title>
 </head>
 <body>
-  
-<?php  if(isset($msg)) echo "<h3>" . $msg . "</h3>";?>
- 	<div style="margin-right: auto; margin-left: auto; width: 165px">
-		<h3 align="center">Transicionador:</h3>
+   	<div>
+		<h3 >Transicionador:</h3>
 		<form action="" name="frmTransacionador" method="post">
 			<input type="text" name= "cgc" placeholder="Digite o CPF/CNPJ" required="required" autofocus="autofocus" maxlength="18" style="width: 170px"/>		<p/>
 			
 			<p>
-	       	<button name="btnConsultar" type="submit" style="width: 170px">Salvar</button>
+	       	<button name="btnConsultar" type="submit" style="width: 170px">Consultar</button>
 	       	<button name="btnlimpar" type="reset" style="width: 170px">Limpar</button>
 			
 		</form>		
@@ -39,13 +37,13 @@
 				where cgctrs = ?");
 		
 		$sql->execute(array($_POST["cgc"]));
-		$sql = $sql->fetchAll(PDO::FETCH_BOTH);
+		$s = $sql->fetchAll(PDO::FETCH_BOTH);
 		
-		echo '<table cellpadding=2 cellspacing=2 border=1>';
-		
-		foreach ($sql as $s){ 
-			if($s['cgctrs'] > 0) {
-				echo '<tr> <th> RG </th>	             <th> ' . $s["rgtrs"] . ' </th> </tr>
+		echo '<table cellpadding=2 cellspacing=2 border=1 >';
+			if(count($s) > 0) {
+				$s = $s[0];
+				echo '<tr> <th> CPF/CNPJ </th>	         <th> ' . $s["cgctrs"] . ' </th> </tr>
+					  <tr> <th> RG </th>	             <th> ' . $s["rgtrs"] . ' </th> </tr>
 					  <tr> <th> Nome </th>	             <th> ' . $s["nomtrs"] . ' </th></tr>
 					  <tr> <th> Sexo </th>	             <th> ' . $s["sextrs"] . ' </th></tr>
 					  <tr> <th> Razão Social </th>	     <th> ' . $s["razsoctrs"] . ' </th></tr>
@@ -57,13 +55,13 @@
 					  <tr> <th> E-mail </th>	         <th> ' . $s["ematrs"] . ' </th></tr>
 					  <tr> <th> Endereço </th>	         <th> ' . $s["endtrs"] . ' </th></tr>
 					  <tr> <th> Cidade </th>	         <th> ' . $s["cidtrs"] . ' </th></tr>
-					  <tr> <th> Logradouro </th>	     <th> ' . $s["logtrs"] . ' </th></tr>
-					  <tr> <th> Inscrição Estadual </th> <th> ' . $s["insesttrs"] . ' </th>	</tr>			   
+					 '// <tr> <th> Logradouro </th>	     <th> ' . $s["logtrs"] . ' </th></tr>
+				   .' <tr> <th> Inscrição Estadual </th> <th> ' . $s["insesttrs"] . ' </th>	</tr>			   
 					  <tr> <th> Tipo cliente </th>	     <th> ' . $s["dsctip"] . ' </th> </tr>';
 				
 			} else echo "Nenhum registro encontrado";
-		}
 		
-		echo '</table>';
+		
+		echo '</table></div>';
 	}
 ?>

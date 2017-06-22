@@ -5,10 +5,8 @@
 <title>Consulta de Produtos</title>
 </head>
 <body>
-  
-<?php  if(isset($msg)) echo "<h3>" . $msg . "</h3>";?>
- 	<div style="margin-right: auto; margin-left: auto; width: 165px">
-		<h3 align="center">Produto:</h3>
+   	<div>
+		<h3>Produto:</h3>
 		<form action="" name="frmProduto" method="post">
 			<input type="text" name= "cod" placeholder="Código do Produto" required="required" autofocus="autofocus" maxlength="18" style="width: 170px"/>		<p/>
 			
@@ -40,11 +38,12 @@
 				where codpro = ?");
 		
 		$sql->execute(array($_POST["cod"]));
-		$sql = $sql->fetchAll(PDO::FETCH_BOTH);
+		$s = $sql->fetchAll(PDO::FETCH_BOTH);
 		
 		echo '<table cellpadding=2 cellspacing=2 border=1>';
-		foreach ($sql as $s){ 
-			if($s['codpro'] > 0) {
+		
+			if(count($s) > 0) {
+				$s = $s[0]; 
 				echo '<tr> <th> Nome </th>	                 <th> ' . $s["nompro"] . ' </th></tr>
 					  <tr> <th> Fabricação </th>	         <th> ' . $s["fabpro"] . ' </th></tr>
 					  <tr> <th> Valor de compra </th>	     <th> ' . $s["valcompro"] . ' </th></tr>
@@ -55,11 +54,10 @@
 					  <tr> <th> Tabela desconto </th>	     <th> ' . $s["desctabdes"] . ' </th></tr>
 					  <tr> <th> Tabela de preço </th>	     <th> ' . $s["destabpre"] . ' </th></tr>
 					  <tr> <th> Categoria </th>	             <th> ' . $s["descat"] . ' </th></tr>
-					  <tr> <th> Data de cadastro </th>	     <th> ' . $s["datcadpro"] . ' </th></tr>
-';
+					  <tr> <th> Data de cadastro </th>	     <th> ' . $s["datcadpro"] . ' </th></tr>';
 				
 			} else echo "Nenhum registro encontrado";
-		}
+		
 		echo '</table>';
 	}
 ?>
