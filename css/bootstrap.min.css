@@ -96,3 +96,24 @@
 .nb-login .or{
   color: #FFF;
 }
+
+body{
+	
+    background: url(http://nihealthcare.com/wp-content/uploads/2017/03/pharmacybackground2.png);
+	background-color: #444;
+    background: url(http://nihealthcare.com/wp-content/uploads/2017/03/pharmacybackground2.png);    
+}
+
+.vertical-offset-100{
+    padding-top:200px;
+}
+
+.panel-body1{
+    color:#0D0D0D;
+    background:#11FF31;
+    opacity:0.70;
+}
+
+.panel-title{
+    text-align: center;
+}
