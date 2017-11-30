@@ -13,7 +13,7 @@
 ?>
 
  	<div style="margin-left: 100px; margin-top: 100px">
-		<h3 align="center">Transicionador:</h3>
+		<h3>Transicionador:</h3>
 		<form action="processaTransacionador.php" name="frmTransacionador" method="post">
 			<input type="text"   name= "cgc" placeholder="Digite o CPF/CNPJ"                   required="required" autofocus="autofocus" maxlength="18" style="width: 170px"/>		<p/>
 			<input type="text"   name= "nom" placeholder="Digite o nome"                       required="required" maxlength="60" style="width: 170px"/>		<p/>

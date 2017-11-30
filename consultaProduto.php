@@ -65,7 +65,7 @@
 
 		$s = $sql->fetchAll(PDO::FETCH_BOTH);
 		
-		echo '<br><br><table class="table table-bordered table-striped table-responsive">';
+		echo '<br><br><div style="margin-left: 100px"><table class="table table-bordered table-striped table-responsive">';
 			
 	        if(count($s) > 0) {
 	        	echo '	<thead>
@@ -100,8 +100,9 @@
 								<td> ' . $row["destabpre"] . ' </td>
 								<td> ' . $row["descat"] . ' </td>
 								<td> ' . $row["datcadpro"] . ' </td>
-							</tr></tbody></table>';
+							</tr>';
 				} 
+				echo '</tbody></table>';
 			}else echo "Nenhum registro encontrado";
 		
 ?>
