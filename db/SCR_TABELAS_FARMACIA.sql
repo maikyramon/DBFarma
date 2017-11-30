@@ -205,8 +205,8 @@ COMMENT ON COLUMN TRANSACIONADOR.DATCADTRS IS 'data de cadastro do transicionado
 
 CREATE TABLE USUARIO (
 	CODUSU SERIAL NOT NULL, 
-	LOGUSU int4 NOT NULL UNIQUE, 
-	SENUSU int4 NOT NULL, 
+	LOGUSU varchar(50) NOT NULL UNIQUE, 
+	SENUSU varchar(50) NOT NULL, 
 	NOMUSU varchar(50) NOT NULL, 
 	PRIMARY KEY (CODUSU)
 );
@@ -246,8 +246,7 @@ COMMENT ON COLUMN VENDA_ITEM.VALACRITM IS 'valor de acréscimo no item na venda'
 CREATE TABLE LOG_AUDITORIA(
 	DESLOG varchar(100),
 	DATLOG timestamp,
-	USRLOG integer,
-	CONSTRAINT FK_LOG_USR  FOREIGN KEY (USRLOG) REFERENCES USUARIO (CODUSU)
+	USRLOG integer
 );
 
 
@@ -276,53 +275,56 @@ ALTER TABLE PRODUTO ADD         CONSTRAINT FK_PROD_TABDES    FOREIGN KEY (CODTAB
 ALTER TABLE CONTAS_PAGAR ADD    CONSTRAINT FK_CNTPAG_TRS     FOREIGN KEY (CGCTRS)    REFERENCES TRANSACIONADOR (CGCTRS);
 
 
-CREATE FUNCTION trg_trs() RETURNS trigger AS $trg_trs$
+CREATE or REPLACE FUNCTION trg_trs() RETURNS trigger AS $trg_trs$
 BEGIN
 	INSERT INTO LOG_AUDITORIA VALUES ('INSERT TRANSACIONADOR', CURRENT_TIMESTAMP, CURRENT_USER);
+	RETURN NEW;
 END;
 $trg_trs$ LANGUAGE plpgsql;
 
 CREATE TRIGGER trg_trs BEFORE INSERT ON transacionador FOR EACH ROW EXECUTE PROCEDURE trg_trs();
 
-CREATE FUNCTION trg_prod() RETURNS trigger AS $trg_prod$
+CREATE or REPLACE FUNCTION trg_prod() RETURNS trigger AS $trg_prod$
 BEGIN
 	INSERT INTO LOG_AUDITORIA VALUES ('INSERT PRODUTO', CURRENT_TIMESTAMP, CURRENT_USER);
+	RETURN NEW;
 END;
 $trg_prod$ LANGUAGE plpgsql;
 
-CREATE TRIGGER trg_prod BEFORE INSERT ON transacionador FOR EACH ROW EXECUTE PROCEDURE trg_prod();
-
-CREATE VIEW VW_RELATORIO1 AS (
-SELECT t.cgctrs, t.nomtrs, t.datcadtrs FROM transacionador t
-INNER JOIN tipo_transacionador p ON t.codtiptrs = p.codtiptrs
-WHERE t.sextrs = 'F' AND
-p.tiptrs = 'C'
-ORDER BY nomtrs DESC);
+CREATE TRIGGER trg_prod BEFORE INSERT ON produto FOR EACH ROW EXECUTE PROCEDURE trg_prod();
 
 
-CREATE VIEW VW_RELATORIO2 AS ( 
-SELECT p.codpro, p.nompro, p.valvenpro FROM produto p
-INNER JOIN categoria c ON p.codcat = c.codcat
-WHERE extract(YEAR FROM datcadpro) = 2017 AND
-valvenpro > 100 AND
-c.codcat = 6
-ORDER BY nompro ASC);
 
 
-CREATE VIEW VW_RELATORIO3 AS (
-SELECT EXTRACT(MONTH FROM v.datven) AS mes, count(v.*) AS qtd, sum(valtotven) as val FROM venda v
-INNER JOIN venda_item i ON i.codven = v.codven
-INNER JOIN transacionador t ON t.cgctrs = v.cgctrs
-WHERE i.valdesitm > 0 AND
-extract(YEAR FROM v.datven) = 2016 AND
-sextrs = 'M'
-GROUP BY mes);
+CREATE or REPLACE FUNCTION ins_trans(cgc varchar, nom varchar, sex varchar, raz varchar, fan varchar, nas varchar, tel varchar, cel varchar, ema varchar, ende varchar, cid varchar, ins varchar, rgt varchar, ctt varchar) RETURNS integer AS $$
+DECLARE
+
+BEGIN
+	INSERT INTO TRANSACIONADOR (CGCTRS, NOMTRS, SEXTRS, RAZSOCTRS, NOMFANTRS, DATNASFUNTRS,         DATCADTRS, TELTRS, CELTRS, EMATRS, ENDTRS, CIDTRS, INSESTTRS, RGTRS, CODTIPTRS)
+			    values (   cgc,    nom,    sex,       raz,       fan,          nas, current_timestamp,    tel,    cel,    ema,   ende,    cid,       ins,   rgt,      cast(ctt as integer));
+	RETURN 1;
+	EXCEPTION WHEN OTHERS THEN
+	RETURN 0;	
+			
+END;
+$$ LANGUAGE plpgsql;
 
 
-CREATE VIEW VW_RELATORIO4 AS (
-SELECT t.cgctrs, v.codven, v.datven, v.valtotven FROM venda v
-INNER JOIN transacionador t ON t.cgctrs = v.cgctrs
-WHERE (upper(t.cidtrs) like ('MARAVILHA') OR
-upper(t.cidtrs) like ('DESCANÇO')) AND
-mod(cast(EXTRACT(MONTH FROM v.datven)as integer), 2) > 0
-ORDER BY datven DESC);
+
+CREATE or REPLACE FUNCTION ins_prod(nom varchar, fab varchar, com varchar, ven varchar, des varchar, esp varchar, qua varchar, tbd varchar, tbp varchar, cat varchar) RETURNS integer AS $$
+DECLARE
+    
+BEGIN
+	INSERT INTO PRODUTO (NOMPRO, FABPRO,                  
+			     VALCOMPRO,  VALVENPRO, PERDESPRO, 
+			     ESPPRO, 
+			     QUAPRO, CODTABDES, CODTABPRE, CODCAT, DATCADPRO)
+	            values  (nom,    fab, 
+			     cast(com as decimal(10,2)), cast(ven as decimal(10,2)), cast(des as decimal(10,2)),    
+			     esp,    
+			     cast(qua as integer), cast(tbd as integer),  cast(tbp as integer), cast(cat as integer), current_timestamp);
+	RETURN 1; 
+	EXCEPTION WHEN OTHERS THEN
+	RETURN 0;
+END;
+$$ LANGUAGE plpgsql;
