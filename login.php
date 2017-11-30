@@ -3,21 +3,25 @@
 	require 'dao/usuario_dao.php';
 
 	session_start();
-	
+	echo 'asd1';
 	if (isset($_SESSION["usuario"])) unset($_SESSION["usuario"]);
-	
+	echo 'asd2';
 	if(isset($_POST["login"]) && isset($_POST["senha"])){
 		//verifica login
-	$retorno = validaLogin($_POST["login"], $_POST["senha"]);
-	if ($retorno){
-		//cria sessao
-		session_start();
-		$_SESSION["usuario"] = $_POST["login"];
-		header ("Location: index.php");
-	} else {
-		$mensagem = "Login e/ou senha inv�lidos! tente novamente";
-	}
-  }
+		echo 'asd3';
+		$retorno = validaLogin($_POST["login"], $_POST["senha"]);
+		if ($retorno){
+			echo 'asd4';
+			//cria sessao
+			session_start();
+			echo 'asd5';
+			$_SESSION["usuario"] = $_POST["login"];
+			echo 'asd6';
+			header ("Location: index.php");
+		} else {
+			$mensagem = "Login e/ou senha inválidos! tente novamente";
+		} echo 'asd7';
+    }
 
 ?>
 
@@ -44,13 +48,13 @@
 			    	<h4 class="panel-title">Acessar</h4>
 			 	</div>
 			  	<div class="panel-body">
-			    	<form accept-charset="UTF-8" role="form">
+			    	<form accept-charset="UTF-8" role="form" method="POST">
                     <fieldset>
 			    	  	<div class="form-group">
-			    		    <input class="form-control" placeholder="Login" name="email" type="text">
+			    		    <input class="form-control" placeholder="Login" name="login" type="text">
 			    		</div>
 			    		<div class="form-group">
-			    			<input class="form-control" placeholder="Password" name="password" type="password" value="">
+			    			<input class="form-control" placeholder="Password" name="senha" type="password" value="">
 			    		</div>
 			    		<div class="checkbox">
 			    	    	<label>
