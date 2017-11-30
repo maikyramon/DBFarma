@@ -1,13 +1,18 @@
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf8">
 <title>Cadastro de Transicionador</title>
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+
 </head>
 <body>
   
-<?php  if(isset($msg)) echo "<h3>" . $msg . "</h3>";?>
- 	<div style="margin-right: auto; margin-left: auto; width: 165px">
+<?php  if(isset($msg)) echo "<h3>" . $msg . "</h3>";
+	include('menu.php');
+?>
+
+ 	<div style="margin-left: 100px; margin-top: 100px">
 		<h3 align="center">Transicionador:</h3>
 		<form action="processaTransacionador.php" name="frmTransacionador" method="post">
 			<input type="text"   name= "cgc" placeholder="Digite o CPF/CNPJ"                   required="required" autofocus="autofocus" maxlength="18" style="width: 170px"/>		<p/>

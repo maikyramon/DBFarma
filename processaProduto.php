@@ -16,7 +16,7 @@ if (isset ( $_POST )) {
 				:qua, :tbd, :tbp, :cat,
 				current_timestamp)";
 		
-		print_r($_POST);
+		
 		
 		$sql = $conexao->prepare($sql);
 		

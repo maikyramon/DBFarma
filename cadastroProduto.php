@@ -3,20 +3,21 @@
 <head>
 <meta charset="utf8">
 <title>Cadastro de Produto</title>
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-  
-	<div style="margin-right: auto; margin-left: auto; width: 165px">
-		<h3 align="center">Produto:</h3>
+  <?php include('menu.php');?>
+	<div style="margin-top: 100px; margin-left: 100px;" >
+		<h3> Produto: </h3>
 	
 		<form action="processaProduto.php" name="frmCadastroProduto" method="post">
-			<input type="text"   name="nom" placeholder="Nome do Produto"        required="required" style="width: 170px" maxlength="20" /><p>
-			<input type="text"   name="fab" placeholder="Nome do Fabricante"     required="required" style="width: 170px" /><p>
-			<input type="number" name="com" placeholder="Valor de Compra"        required="required" style="width: 170px" step='any' /><p>
-			<input type="number" name="ven" placeholder="Valor de Venda"         required="required" style="width: 170px" step='any' /><p>
-			<input type="text"   name="des" placeholder="Percentual de desconto" required="required" style="width: 170px" /><p>
-			<input type="text"   name="esp" placeholder="Especificação"          required="required" style="width: 170px" maxlength="20" /><p>
-			<input type="text"   name="qua" placeholder="Quantidade de compra"   required="required" style="width: 170px" /><p>
+			<input type="text"   name="nom" placeholder="Nome do Produto"        required="required" style="width: 300px" maxlength="20" /><p>
+			<input type="text"   name="fab" placeholder="Nome do Fabricante"     required="required" style="width: 300px" /><p>
+			<input type="number" name="com" placeholder="Valor de Compra"        required="required" style="width: 300px" step='any' /><p>
+			<input type="number" name="ven" placeholder="Valor de Venda"         required="required" style="width: 300px" step='any' /><p>
+			<input type="text"   name="des" placeholder="Percentual de desconto" required="required" style="width: 300px" /><p>
+			<input type="text"   name="esp" placeholder="Especificação"          required="required" style="width: 300px" maxlength="20" /><p>
+			<input type="text"   name="qua" placeholder="Quantidade de compra"   required="required" style="width: 300px" /><p>
 			<p>
 			<label> Selecione a tabela de desconto </label> 
 			<select name="tbd" style="width: 170px">
