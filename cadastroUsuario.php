@@ -6,8 +6,8 @@
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<div style="margin-top: 100px; margin-left: 100px;>
-	<form action="processaUsuario.php" name="frmcadusuario" method="post">
+<div style="margin-top: 100px; margin-left: 100px;">
+	<form action="processaUsuario.php" name="frmcadusuario" method="POST">
 	 	<h2>Cadastro de Usuário</h2> 
 		<input type="text" name="nom" placeholder="Nome Completo" required="required" autofocus="autofocus" maxlength="40" style="width: 350px"/><p/><p/>
 		<input type="text" name="log" placeholder="Login"         required="required" autofocus="autofocus" maxlength="30" style="width: 350px"/><p/>
@@ -20,7 +20,3 @@
 </div>
 </body>
 </html>
-<?php
-
-
-?>

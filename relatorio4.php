@@ -12,7 +12,7 @@
 			require 'db/conexao.php';
 
 			global $conexao;
-			$sql = 'SELECT t.cgctrs, v.codven, v.datven, v.valtotven FROM VW_RELATORIO4 v';
+			$sql = 'SELECT * FROM VW_RELATORIO4 v';
 			
 			$sql = $conexao->prepare($sql);
 			$sql->execute();
@@ -35,12 +35,11 @@
 				   	 <th>'. $s['codven'].    '</th>
 					 <th>'. $s['datven'].    '</th>
 					 <th>'. $s['valtotven']. '</th>
-					 </tr>
-			         </tbody>
-			         </table>';
+					 </tr>';
+			         
 			}
 			   		
-			echo '</table>';
+			echo '</tbody></table>';;
 		?>
 	</div>
 </body>

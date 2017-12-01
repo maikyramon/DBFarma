@@ -3,24 +3,23 @@
 	require 'dao/usuario_dao.php';
 
 	session_start();
-	echo 'asd1';
 	if (isset($_SESSION["usuario"])) unset($_SESSION["usuario"]);
-	echo 'asd2';
+
 	if(isset($_POST["login"]) && isset($_POST["senha"])){
 		//verifica login
-		echo 'asd3';
+
 		$retorno = validaLogin($_POST["login"], $_POST["senha"]);
 		if ($retorno){
-			echo 'asd4';
+
 			//cria sessao
 			session_start();
-			echo 'asd5';
+
 			$_SESSION["usuario"] = $_POST["login"];
-			echo 'asd6';
+
 			header ("Location: index.php");
 		} else {
 			$mensagem = "Login e/ou senha inválidos! tente novamente";
-		} echo 'asd7';
+		}
     }
 
 ?>
@@ -61,7 +60,8 @@
 			    	    		<input name="remember" type="checkbox" value="Remember Me"> Lembrar Senha!
 			    	    	</label>
 			    	    </div>
-			    		<input class="btn btn-lg btn-success btn-block panel-body1" type="submit" value="Login">
+			    		 <input class="btn btn-lg btn-success btn-block panel-body1" type="submit" value="Login">
+			    		 <a href="cadastroUsuario.php" class="btn btn-lg btn-success btn-block panel-body1"> Regitre-se!</a>
 			    	</fieldset>
 			      	</form>
 			    </div>

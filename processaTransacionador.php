@@ -15,7 +15,7 @@
 		if (isset ( $_POST )) {
 			if (validaCgc($_POST["cgc"])){
 				$sql = "SELECT INS_TRANS (:cgc, :nom, :sex, :raz, :fan, :nas, :tel, :cel, :ema, :end, :cid, :ins, :rgt, :ctt)";
-			
+				
 				$sql = $conexao->prepare($sql);
 				
 				$sql->bindParam(':cgc', $_POST['cgc'], PDO::PARAM_STR);

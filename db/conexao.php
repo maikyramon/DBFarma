@@ -2,9 +2,9 @@
 try {
 	$conexao = new PDO(
 			//dados da conexao
-			'pgsql:host=192.168.1.7;dbname=bdfarmacia',
+			'pgsql:host=localhost;dbname=bdfarmacia',
 			//usuario, senha
-			'postgres','postgres');
+			'postgres','13232729');
 } catch (PDOException $e) {
 	echo $e->getMessage();
 }

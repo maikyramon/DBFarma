@@ -12,7 +12,7 @@
 			require 'db/conexao.php';
 			global $conexao;
 				
-			$sql = 'SELECT EXTRACT(MONTH FROM v.datven) AS mes, count(v.*) AS qtd, sum(valtotven) as val FROM VW_RELATORIO3 v';
+			$sql = 'SELECT * FROM VW_RELATORIO3 v';
 					
 			
 			$sql = $conexao->prepare($sql);
@@ -33,12 +33,11 @@
 				   	 <th>'. $s['mes']. '</th>
 					 <th>'. $s['qtd']. '</th>
 					 <th>'. $s['val']. '</th>
-					 </tr>
-			         </tbody>
-			         </table>';
+					 </tr>';
 			}
 			   		
-			echo '</table>';
+			echo '</tbody>
+			         </table>';
 		?>
 	</div>
 </body>

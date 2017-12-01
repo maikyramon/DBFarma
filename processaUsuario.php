@@ -25,7 +25,7 @@ if (isset ( $_POST )) {
 			echo "Cadastrado com sucesso!";
 		
 	} else echo "Login ja utilizado";
-}
+} else echo  "Login ja utilizado";
 
 function validaLogin($log){
 	global $conexao;

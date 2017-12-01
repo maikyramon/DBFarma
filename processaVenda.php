@@ -21,7 +21,7 @@
 		
 		if($sql->errorCode() == 0){ 
 			$qtdtot = $_POST['qtdtot'];
-			
+		
 			for ($i=0; $i<$qtdtot; $i++){
 				$qtd = $_POST['qtd'. $i];
 				$vlr = $_POST['vlr'.$i] *= $qtd; 
@@ -32,8 +32,7 @@
 				$sql = "INSERT INTO venda_item
 		              (valbrtitm, valliqitm, valdesitm, valacritm, codven, codpro)
 					   values
-			   		  (". $vlr. ", ". $liq. ", ". $des. ", 0, ". $ven. ", ". $cod. ")";
-				
+			   		  (". $vlr. ", ". $liq. ", ". $des. ", 0, ". $ven. ", ". $cod. ")";;
 				/*print_r($_POST);
 				echo '<p><p><p>';
 				print_r($sql);*/
@@ -48,7 +47,7 @@
 			if($sql->errorCode() == 0)
 				echo "Vendido com sucesso!";
 				else
-					echo $sql->errorCode();
+					echo 'erro: '. $sql->errorCode();
 		}
 					
 	} else echo "Necessário informar ao menos um (1) item";

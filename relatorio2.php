@@ -32,10 +32,10 @@
 				 	 <th>'. $s['codpro'].    '</th>
 			 		 <th>'. $s['nompro'].    '</th>
 		 			 <th>'. $s['valvenpro']. '</th>
-	 				 </tr>
-			         </tbody>
-			         </table>';
+	 				 </tr>';
 			}
+			echo '</tbody>
+			         </table>';
 		?>
 	</div>
 </body>

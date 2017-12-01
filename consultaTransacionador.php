@@ -102,8 +102,9 @@
 								<td>'. $row["insesttrs"] . ' </td>
 								<td>'. $row["dsctip"] . ' </td>	  
 	                            
-	                        </tr></tbody></table>';
+	                        </tr>';
 				}	
+				echo '</tbody></table>';
 			} else echo "Nenhum registro encontrado";
 		
 		
