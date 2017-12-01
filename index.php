@@ -12,7 +12,9 @@ require 'sessao.php';
 <body>
 	<?php include('menu.php');?>
 	<br><br><br>
-	<h1>DBFarma</h1>
+	
+	
+<img src="https://uploaddeimagens.com.br/images/001/194/939/original/logoDb.png?1512140259">
 
 </body>
 </html>
